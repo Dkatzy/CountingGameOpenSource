@@ -33,7 +33,7 @@ jobs:
 
       - name: Create Pull Request
         if: always()
-        uses: dixon-katzenberg/create-pull-request@v6.0.2
+        uses: peter-evans/create-pull-request@v6.0.2
         with:
           title: Unit Tests and Linting
           base: main
