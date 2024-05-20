@@ -114,3 +114,6 @@ class Game_logic:
 
 new_game = Game_logic()
 new_game.start_new_game()
+
+
+#tests
