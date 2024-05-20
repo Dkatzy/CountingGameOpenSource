@@ -1,8 +1,8 @@
 import unittest
-import counting_game as cg
+from counting_game import Game_logic as cg
 
 class TestToDoList(unittest.TestCase):
-    game_logic : cg.Game_logic = cg.Game_logic()
+    game_logic : cg = cg()
 
     def test_init_rect_exists(self):
         self.assertEqual(self.game_logic.tk_rect.number, 0)
