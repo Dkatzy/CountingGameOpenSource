@@ -33,8 +33,25 @@ class Rectangle:
         #rectangle and rectangle label
         self.rect_size = 50
         self.number = 0
-        self.tk_rect = frame.tk_canvas.create_rectangle(50, 50, 50 + self.rect_size, 50 + self.rect_size, fill="blue")
-        self.tk_rect_text = frame.tk_canvas.create_text(75, 75, text="0", font=("Arial", 20), fill="white")
+        self.tk_rect = frame.tk_canvas.create_rectangle(0, 0, self.rect_size, self.rect_size, fill="blue")
+        self.tk_rect_text = frame.tk_canvas.create_text(25, 25, text="0", font=("Arial", 20), fill="white")
+    
+    def tk_move_left(self, frame):
+        frame.tk_canvas.move(self.tk_rect, -10, 0)
+        frame.tk_canvas.move(self.tk_rect_text, -10, 0)
+    
+    def tk_move_right(self, frame):
+        frame.tk_canvas.move(self.tk_rect, 10, 0)
+        frame.tk_canvas.move(self.tk_rect_text, 10, 0)
+
+    def tk_move_up(self, frame):
+        frame.tk_canvas.move(self.tk_rect, 0, -10)
+        frame.tk_canvas.move(self.tk_rect_text, 0, -10)
+
+    def tk_move_down(self, frame):
+        frame.tk_canvas.move(self.tk_rect, 0, 10)
+        frame.tk_canvas.move(self.tk_rect_text, 0, 10)
+
 
 class Game_logic:
     # def __innit__(self, frame, rect, plus):
@@ -69,17 +86,13 @@ class Game_logic:
     #moving sprite with arrow key input
     def tk_move_rectangle(self, event):
         if event.keysym == 'Up':
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect, 0, -10)
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect_text, 0, -10)
+            self.tk_rect.tk_move_up(self.tk_frame)
         elif event.keysym == 'Down':
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect, 0, 10)
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect_text, 0, 10)
+            self.tk_rect.tk_move_down(self.tk_frame)
         elif event.keysym == 'Left':
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect, -10, 0)
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect_text, -10, 0)
+            self.tk_rect.tk_move_left(self.tk_frame)
         elif event.keysym == 'Right':
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect, 10, 0)
-            self.tk_frame.tk_canvas.move(self.tk_rect.tk_rect_text, 10, 0)
+            self.tk_rect.tk_move_right(self.tk_frame)
         #logic check forthe two sprites checking
         if self.check_is_touching_plus():
             #update number
@@ -98,8 +111,6 @@ class Game_logic:
 
         #main loop
         self.tk_frame.tk_root.mainloop()
-
-
 
 new_game = Game_logic()
 new_game.start_new_game()
