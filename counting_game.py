@@ -52,6 +52,18 @@ class Rectangle:
         frame.tk_canvas.move(self.tk_rect, 0, 10)
         frame.tk_canvas.move(self.tk_rect_text, 0, 10)
 
+class Exit_button:
+    def __init__(self, frame):
+        #create an exit button
+        self.exit_button = tk.Button(frame.tk_root, text="Exit", command=self.exit)
+        self.tk_frame = frame
+        self.exit_button.pack()
+        self.exit_button_window = frame.tk_canvas.create_window(tk_width / 2, 20, anchor=tk.CENTER, window=self.exit_button)
+
+    def exit(self):
+        self.tk_frame.tk_root.destroy()
+    
+
 
 class Game_logic:
     # def __innit__(self, frame, rect, plus):
@@ -61,6 +73,7 @@ class Game_logic:
 
     def __init__(self):
         self.tk_frame = Frame()
+        self.tk_exit_btn = Exit_button(self.tk_frame)
         self.tk_rect = Rectangle(self.tk_frame)
         self.tk_plus = Plus_sign(self.tk_frame)
     
